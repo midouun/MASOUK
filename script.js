@@ -1,36 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
     
-    // 1. تفعيل التمرير السلس عند النقر على الروابط
-    const links = document.querySelectorAll('.sidebar nav a');
-    
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
+    // 1. التمرير السلس (Smooth Scroll)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
             
-            window.scrollTo({
-                top: targetSection.offsetTop - 20,
-                behavior: 'smooth'
-            });
+            if(targetElement){
+                window.scrollTo({
+                    top: targetElement.offsetTop - 40, // ترك مسافة صغيرة من الأعلى
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
-    // 2. تظليل الرابط النشط أثناء التمرير (Active State on Scroll)
+    // 2. تظليل القسم المقروء حالياً في القائمة
+    const sections = document.querySelectorAll('.section-content');
+    const navLinks = document.querySelectorAll('.sidebar nav a');
+
     window.addEventListener('scroll', () => {
         let current = '';
-        const sections = document.querySelectorAll('.section');
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
             
-            if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+            // إذا تجاوزنا ثلث القسم يعتبر هو النشط
+            if (pageYOffset >= (sectionTop - sectionHeight / 4)) {
                 current = section.getAttribute('id');
             }
         });
 
-        links.forEach(link => {
+        navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href').includes(current)) {
                 link.classList.add('active');
