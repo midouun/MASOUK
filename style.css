@@ -1,4 +1,9 @@
-/* --- متغيرات الألوان والخطوط (Theme: تراثي أكاديمي) --- */
+/* ==========================================================================
+   ملف التصميم الكامل: بحث "كتاب الضعفاء"
+   Theme: إسلامي أكاديمي فاخر (أخضر زيتي - ذهبي - كريمي)
+   ========================================================================== */
+
+/* 1. المتغيرات العامة (الألوان والخطوط) */
 :root {
     --primary-color: #1f4037;       /* أخضر زيتي غامق - للعناوين الرئيسية والقوائم */
     --accent-color: #c4a05e;        /* ذهبي معتق - للزخارف والروابط */
@@ -8,34 +13,39 @@
     --text-light: #666666;          /* رمادي - للهوامش */
     --border-color: #e0dacb;        /* لون الحدود */
     
-    --font-heading: 'Aref Ruqaa', serif; /* خط العناوين */
-    --font-body: 'Amiri', serif;         /* خط المتن */
+    --font-heading: 'Aref Ruqaa', serif; /* خط العناوين المزخرف */
+    --font-body: 'Amiri', serif;         /* خط المتن للقراءة */
 }
 
-/* --- الإعدادات العامة --- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* 2. الإعدادات الأساسية (Reset & Base) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: var(--font-body);
     background-color: var(--bg-body);
     color: var(--text-color);
     direction: rtl;
-    line-height: 2.3; /* تباعد أسطر مريح للقراءة الأكاديمية */
+    line-height: 2.3; /* تباعد أسطر مريح جداً للقراءة */
     font-size: 19px;
+    /* خلفية زخرفية ناعمة جداً */
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231f4037' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-/* --- الهيكل العام (Grid Layout) --- */
+/* 3. تخطيط الصفحة (Layout) */
 .container {
     display: grid;
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 320px 1fr; /* القائمة 320 بكسل والباقي للمحتوى */
     min-height: 100vh;
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     box-shadow: 0 0 50px rgba(0,0,0,0.05);
 }
 
-/* --- القائمة الجانبية --- */
+/* 4. القائمة الجانبية (Sidebar) */
 aside {
     background-color: var(--primary-color);
     color: #fff;
@@ -45,6 +55,8 @@ aside {
     height: 100vh;
     overflow-y: auto;
     border-left: 5px solid var(--accent-color);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-color) var(--primary-color);
 }
 
 .researcher-info {
@@ -64,95 +76,132 @@ aside {
 .researcher-info p {
     font-size: 1rem;
     opacity: 0.8;
+    margin-bottom: 0.5rem;
 }
 
-nav ul { list-style: none; }
+nav ul {
+    list-style: none;
+}
 
-nav li { margin-bottom: 0.5rem; }
+nav li {
+    margin-bottom: 0.8rem;
+}
 
 nav a {
     display: block;
     text-decoration: none;
-    color: #fff;
+    color: rgba(255, 255, 255, 0.9);
     padding: 1rem;
     border-radius: 8px;
     transition: all 0.3s ease;
     border-right: 4px solid transparent;
+    font-size: 1.1rem;
 }
 
 nav a:hover, nav a.active {
-    background-color: rgba(255,255,255,0.05);
+    background-color: rgba(255,255,255,0.08);
     border-right-color: var(--accent-color);
     padding-right: 1.5rem;
+    color: #fff;
+    font-weight: bold;
 }
 
-/* --- منطقة المحتوى (الورقة) --- */
+/* 5. منطقة المحتوى (Main Content) */
 main {
     padding: 4rem;
-    background-color: var(--bg-paper);
+    background-color: transparent;
 }
 
 .paper-content {
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
     background: #fff;
-    padding: 3rem;
+    padding: 4rem;
     border: 1px solid var(--border-color);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    border-radius: 4px;
     position: relative;
+    /* تأثير انتقال ناعم عند التحميل */
+    opacity: 0; 
+    transform: translateY(20px);
 }
 
-/* زخرفة الزوايا للورقة */
-.paper-content::before, .paper-content::after {
+/* زخارف زوايا الورقة */
+.paper-content::before {
     content: "۞";
     position: absolute;
+    top: 15px;
+    right: 15px;
     color: var(--accent-color);
     font-size: 2rem;
-    font-family: serif;
+    opacity: 0.5;
 }
-.paper-content::before { top: 10px; right: 10px; }
-.paper-content::after { bottom: 10px; left: 10px; }
 
-/* --- النصوص --- */
+.paper-content::after {
+    content: "۞";
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: var(--accent-color);
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
+/* 6. تنسيق النصوص (Typography) */
 h1 {
     font-family: var(--font-heading);
     color: var(--primary-color);
     font-size: 2.8rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     line-height: 1.4;
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 1rem;
-    display: inline-block;
-    width: 100%;
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--accent-color);
+    margin: 1rem auto 0;
 }
 
 h3 {
     font-family: var(--font-heading);
     color: var(--primary-color);
-    font-size: 1.8rem;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    border-right: 4px solid var(--accent-color);
+    font-size: 1.9rem;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    border-right: 5px solid var(--accent-color);
     padding-right: 1rem;
-    background: linear-gradient(to left, transparent, rgba(196, 160, 94, 0.1));
+    background: linear-gradient(to left, transparent, rgba(196, 160, 94, 0.05));
+    border-radius: 4px;
 }
 
 p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.8rem;
     text-align: justify;
 }
 
 ul, ol {
     margin-right: 2.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    padding-left: 1rem;
 }
 
-li { margin-bottom: 0.8rem; }
+li {
+    margin-bottom: 1rem;
+}
 
-/* --- التنقل السفلي (Next/Prev) --- */
+strong {
+    color: var(--primary-color);
+}
+
+/* 7. أزرار التنقل (Pagination) */
 .pagination {
-    margin-top: 4rem;
+    margin-top: 5rem;
     display: flex;
     justify-content: space-between;
     padding-top: 2rem;
@@ -163,29 +212,186 @@ li { margin-bottom: 0.8rem; }
     text-decoration: none;
     background-color: var(--primary-color);
     color: #fff;
-    padding: 10px 25px;
-    border-radius: 5px;
+    padding: 12px 30px;
+    border-radius: 6px;
     font-family: var(--font-heading);
-    transition: background 0.3s;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.btn:hover { background-color: var(--accent-color); }
+.btn:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
 
-/* --- التذييل --- */
+/* 8. التذييل (Footer) */
 footer {
     text-align: center;
     margin-top: 4rem;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--text-light);
     border-top: 1px dashed var(--accent-color);
-    padding-top: 1rem;
+    padding-top: 1.5rem;
+    font-family: var(--font-heading);
 }
 
-/* --- التجاوب مع الجوال --- */
+/* ==========================================================================
+   9. إضافات الجافا سكريبت المتقدمة (New Features Styles)
+   ========================================================================== */
+
+/* أ) شريط تقدم القراءة (Reading Progress Bar) */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--accent-color);
+    width: 0%;
+    z-index: 9999;
+    box-shadow: 0 2px 4px rgba(196, 160, 94, 0.5);
+    transition: width 0.1s linear;
+}
+
+/* ب) زر الصعود للأعلى (Back to Top) */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    left: 30px; /* يسار الشاشة لأن الموقع عربي */
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-5px);
+}
+
+/* ج) أدوات التحكم بحجم الخط (Font Size Controls) */
+.font-controls {
+    position: fixed;
+    bottom: 30px;
+    right: 30px; /* يمين الشاشة */
+    background: #fff;
+    padding: 8px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    border: 1px solid var(--border-color);
+    z-index: 1000;
+    display: flex;
+    gap: 8px;
+}
+
+.font-controls button {
+    background: none;
+    border: 1px solid transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.font-controls button:hover {
+    background-color: rgba(196, 160, 94, 0.1);
+    color: var(--accent-color);
+    border-color: rgba(196, 160, 94, 0.3);
+}
+
+/* ==========================================================================
+   10. التجاوب مع الشاشات المختلفة (Media Queries)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 280px 1fr;
+    }
+}
+
 @media (max-width: 900px) {
-    .container { grid-template-columns: 1fr; }
-    aside { height: auto; position: relative; padding: 1rem; }
-    main { padding: 1rem; }
-    .paper-content { padding: 1.5rem; }
-    h1 { font-size: 2rem; }
+    .container {
+        grid-template-columns: 1fr; /* تحويل القائمة للأعلى */
+    }
+    
+    aside {
+        height: auto;
+        position: relative;
+        padding: 1.5rem;
+        border-left: none;
+        border-bottom: 5px solid var(--accent-color);
+    }
+
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    nav li {
+        margin-bottom: 0;
+        width: 100%; /* اجعل الروابط عريضة في الموبايل لسهولة النقر */
+    }
+
+    main {
+        padding: 1.5rem;
+    }
+
+    .paper-content {
+        padding: 2rem 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 1.6rem;
+    }
+
+    .font-controls {
+        bottom: 10px;
+        right: 10px;
+        padding: 5px;
+    }
+    
+    .font-controls button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .back-to-top {
+        bottom: 10px;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+    }
 }
